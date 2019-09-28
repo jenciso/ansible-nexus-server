@@ -1,0 +1,10 @@
+---
+## NEXUS
+nexus_version: latest
+
+## CLOUDFLARE
+
+cf_key: "{{ vault_cf_key }}"
+cf_user: juan.enciso@gmail.com
+cf_zone: enciso.site
+cf_host: nexus-az.enciso.site

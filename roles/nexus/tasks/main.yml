@@ -1,0 +1,27 @@
+---
+- name: nexus | create directory
+  file: path={{ item }} state=directory owner=200 group=200
+  with_items:
+    - /data/nexus/data
+
+
+- name: nexus | create .env
+  lineinfile:
+    path: /data/nexus/.env
+    regexp: '^COMPOSE_PROJECT_NAME='
+    state: present
+    create: yes
+    line: COMPOSE_PROJECT_NAME=nexus
+
+
+- name: nexus | copy docker-compose.yml
+  template:
+    src: docker-compose.yml
+    dest: /data/nexus
+  notify: restart nexus
+
+
+- name: nexus | start nexus
+  shell: "docker-compose -f docker-compose.yml up -d"
+  args:
+    chdir: /data/nexus

@@ -1,0 +1,7 @@
+- name: nexus | server
+  remote_user: ansible
+  hosts: nexus
+  roles:
+    - nexus
+  tags:
+    - nexus
