@@ -1,4 +1,0 @@
-- name: restart nexus
-  shell: "docker-compose -f docker-compose.yml up --force-recreate -d"
-  args:
-    chdir: /data/nexus
