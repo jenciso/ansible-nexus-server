@@ -1,0 +1,40 @@
+---
+## Firewall Rules
+firewalld_disabled: false
+firewalld_rules:
+      http:
+        port: 80
+        protocol: tcp
+        state: enabled
+        zone: public
+        permanent: true
+      https:
+        port: 443
+        protocol: tcp
+        state: enabled
+        zone: public
+        permanent: true
+      nexus-repo-docker-snapshots:
+        port: 18441
+        protocol: tcp
+        state: enabled
+        zone: public
+        permanent: true
+      nexus-repo-docker-releases:
+        port: 18442
+        protocol: tcp
+        state: enabled
+        zone: public
+        permanent: true
+      nexus-repo-docker-group:
+        port: 18443
+        protocol: tcp
+        state: enabled
+        zone: public
+        permanent: true
+      nexus-repo-docker-infra:
+        port: 18444
+        protocol: tcp
+        state: enabled
+        zone: public
+        permanent: true

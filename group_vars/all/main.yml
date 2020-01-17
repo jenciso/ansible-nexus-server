@@ -1,0 +1,7 @@
+---
+## COMMON
+selinux_enabled: true
+
+## NEXUS
+nexus_version: latest
+nexus_host: nexus.enciso.website

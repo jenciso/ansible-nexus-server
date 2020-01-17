@@ -1,0 +1,14 @@
+---
+- name: haproxy | create directory ssl
+  file: path=/etc/haproxy/ssl state=directory
+  tags:
+    - haproxy-custom
+
+- name: haproxy | copy ssl certificates
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/haproxy/ssl/{{ item | basename }}"
+  with_items:
+    - "{{ haproxy_ssl_certificate }}"
+  tags:
+    - haproxy-custom

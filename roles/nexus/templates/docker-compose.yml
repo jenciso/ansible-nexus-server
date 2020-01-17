@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+
+  nexus:
+    container_name: nexus
+    image: sonatype/nexus3:{{ nexus_version | default('latest') }}
+    volumes:
+      - /data/nexus/data:/nexus-data
+    ports:
+      - "8081:8081"
+      - "18440:18440"
+      - "18441:18441"
+      - "18442:18442"
+      - "18443:18443"
+      - "18444:18444"
+    restart: always
