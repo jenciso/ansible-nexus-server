@@ -64,3 +64,6 @@ cat /data/nexus/data/admin.password
 
 ![](https://i.imgur.com/4bHkou2.png)
 
+* Creating docker-releases repository
+
+![] 

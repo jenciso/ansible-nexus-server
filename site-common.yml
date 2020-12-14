@@ -3,8 +3,14 @@
   hosts: nexus
   roles:
     - common
-    - docker-ce
     - firewalld
-    - join-win-ad
   tags:
     - common
+
+- name: nexus | docker
+  remote_user: centos
+  hosts: nexus
+  roles:
+    - docker-ce
+  tags:
+    - docker
