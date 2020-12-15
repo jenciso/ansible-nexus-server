@@ -2,16 +2,33 @@ version: '3.1'
 
 services:
 
-  nexus:
-    container_name: nexus
-    image: sonatype/nexus3:{{ nexus_version | default('latest') }}
+  nginx:
+    image: nginx:{{ nginx_version | default('latest') }}
+    networks:
+      - nexus_net
     volumes:
-      - /data/nexus/data:/nexus-data
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/certificate-bundle.crt:/etc/nginx/certificate-bundle.crt
+      - ./config/private.key:/etc/nginx/private.key
     ports:
-      - "8081:8081"
+      - "80:80"
+      - "443:443"
       - "18440:18440"
       - "18441:18441"
       - "18442:18442"
       - "18443:18443"
       - "18444:18444"
     restart: always
+
+  nexus:
+    container_name: nexus
+    image: sonatype/nexus3:{{ nexus_version | default('latest') }}
+    volumes:
+      - /data/nexus/data:/nexus-data
+    networks:
+      - nexus_net
+    restart: always
+
+networks:
+  nexus_net:
+    driver: bridge

@@ -5,13 +5,3 @@
     - nexus
   tags:
     - nexus
-
-- name: nexus | haproxy
-  remote_user: centos
-  hosts: nexus
-  roles:
-    - haproxy-custom
-    - haproxy
-  tags:
-    - haproxy
-

@@ -3,6 +3,7 @@
   file: path={{ item }} state=directory owner=200 group=200
   with_items:
     - /data/nexus/data
+    - /data/nexus/config
 
 
 - name: nexus | create .env
@@ -12,6 +13,26 @@
     state: present
     create: yes
     line: COMPOSE_PROJECT_NAME=nexus
+
+- name: nexus | copy ssl certificates
+  copy:
+    content: "{{ ssl_fullchain_certificate }}"
+    dest: /data/nexus/config/certificate-bundle.crt
+  notify: restart nexus
+
+
+- name: nexus | copy ssl certificates
+  copy:
+    content: "{{ ssl_private_key }}"
+    dest: /data/nexus/config/private.key
+  notify: restart nexus
+
+
+- name: nexus | copy nginx.conf
+  template:
+    src: nginx.conf
+    dest: /data/nexus/config/nginx.conf
+  notify: restart nexus
 
 
 - name: nexus | copy docker-compose.yml

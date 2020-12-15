@@ -2,6 +2,22 @@
 ## COMMON
 selinux_enabled: true
 
+## SSL
+ssl_fullchain_certificate: "{{ vault_ssl_fullchain_certificate }}"
+ssl_private_key: "{{ vault_ssl_private_key }}"
+
 ## NEXUS
 nexus_version: latest
 nexus_host: nexus.docs-planet.site
+
+nexus_repositories:
+  repo_proxy:
+    port: 18440
+  repo_snapshots:
+    port: 18441
+  repo_releases:
+    port: 18442
+  repo_group:
+    port: 18443
+  repo_infra:
+    port: 18444
