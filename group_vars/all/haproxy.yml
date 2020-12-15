@@ -8,11 +8,11 @@ haproxy_stats_user: admin
 haproxy_stats_pass: password
 haproxy_url_install: https://github.com/jenciso/haproxy-1.8.14.binary.centos7/releases/download/v1.0.0/haproxy-{{ haproxy_version }}.binary.centos7.tar.gz
 haproxy_file: "{{ haproxy_url_install | basename }}"
-haproxy_ssl_certificate: /etc/ansible/files/ssl-certs/enciso.website.pem
+haproxy_ssl_certificate: "{{ vault_haproxy_ssl_certificate }}"
 
 haproxy_config_content: |
-  global 
-      maxconn 4096 
+  global
+      maxconn 4096
       log 127.0.0.1 local0 debug
 
   defaults
@@ -24,14 +24,14 @@ haproxy_config_content: |
      timeout connect 5s
      timeout client 5min
      timeout server 5min
-   
+
   frontend http-in
       bind *:80
-      bind *:443 ssl crt /etc/haproxy/ssl/{{ haproxy_ssl_certificate | basename }}
+      bind *:443 ssl crt /etc/haproxy/ssl/certificate.pem
       mode http
       redirect scheme https if !{ ssl_fc } # Redirect http requests to https
       use_backend nexus
-  
+
   backend nexus
       server nexus1 127.0.0.1:8081
       mode http

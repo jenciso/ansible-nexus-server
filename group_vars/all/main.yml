@@ -4,4 +4,4 @@ selinux_enabled: true
 
 ## NEXUS
 nexus_version: latest
-nexus_host: nexus.enciso.website
+nexus_host: nexus.docs-planet.site

@@ -6,9 +6,7 @@
 
 - name: haproxy | copy ssl certificates
   copy:
-    src: "{{ item }}"
-    dest: "/etc/haproxy/ssl/{{ item | basename }}"
-  with_items:
-    - "{{ haproxy_ssl_certificate }}"
+    content: "{{ haproxy_ssl_certificate }}"
+    dest: "/etc/haproxy/ssl/certificate.pem"
   tags:
     - haproxy-custom
